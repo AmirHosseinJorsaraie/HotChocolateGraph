@@ -1,13 +1,14 @@
-﻿using HotChocolateGraph.Dto;
+﻿using HotChocolateGraph.ApiRepository;
+using HotChocolateGraph.Dto;
 
 namespace HotChocolateGraph.Query
 {
     [ExtendObjectType("Query")]
     public class CourseQuery
     {
-        public List<Course> GetCourses() => new List<Course> {
-            new Course { Id = 1, TeacherId = 12, CourseName = "C1" },
-            new Course { Id = 2, TeacherId = 15, CourseName = "C2" }
-        };
+        public List<Course> GetCourses([Service] ICourseRepository repository)
+        {
+            return repository.GetCourses();
+        }
     }
 }
