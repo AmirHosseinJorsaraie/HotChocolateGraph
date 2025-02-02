@@ -10,19 +10,19 @@ namespace HotChocolateGraph.ApiRepository
             new Person { Id = 2, Age = 15, Name = "T2" }
         };
 
-        void IPersonRepository.Add(Person person)
+        public void Add(Person person)
         {
             _list.Add(person);
         }
 
-        List<Person> IPersonRepository.GetPeople()
+        public List<Person> GetPeople()
         {
             return _list;
         }
 
-        void IPersonRepository.Update(Person person)
+        public void Update(Person person)
         {
-            Person target = _list.FirstOrDefault(x => x.Id == person.Id);
+            var target = _list.FirstOrDefault(x => x.Id == person.Id);
             if (target != null)
             {
                 target.Age = person.Age;    
