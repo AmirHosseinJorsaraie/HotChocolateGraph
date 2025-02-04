@@ -6,7 +6,7 @@ namespace HotChocolateGraph.Mutation
     [ExtendObjectType("Mutation")]
     public class PersonMutation
     {
-        public bool AddPerson([Service] IPersonRepository repository, Person dto)
+        public bool Add([Service] IPersonRepository repository, Person dto)
         {
             try
             {
@@ -18,6 +18,19 @@ namespace HotChocolateGraph.Mutation
                 return false;
             }
 
+        }
+
+        public bool Update([Service] IPersonRepository repository, Person person)
+        {
+            try
+            {
+                repository.Update(person);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
