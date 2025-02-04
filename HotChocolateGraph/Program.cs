@@ -1,14 +1,17 @@
 using HotChocolateGraph.ApiRepository;
+using HotChocolateGraph.Mutation;
 using HotChocolateGraph.Query;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IPersonRepository, PersonRepository>();
-builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddSingleton<IPersonRepository, PersonRepository>();
+builder.Services.AddSingleton<ICourseRepository, CourseRepository>();
 builder.Services.AddGraphQLServer()
-    .AddQueryType(t=> t.Name("Query"))
-    .AddType<PersonQuery>()
-    .AddType<CourseQuery>();
+    .AddQueryType(t => t.Name("Query"))
+    .AddMutationType(t=>t.Name("Mutation"))
+    .AddTypeExtension<PersonQuery>()
+    .AddTypeExtension<CourseQuery>()
+    .AddTypeExtension<PersonMutation>();
 
 var app = builder.Build();
 
