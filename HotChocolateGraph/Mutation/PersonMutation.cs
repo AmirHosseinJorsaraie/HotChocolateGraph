@@ -13,9 +13,9 @@ namespace HotChocolateGraph.Mutation
                 repository.Add(dto);
                 return true;
             }
-            catch
+            catch(GraphQLException e)
             {
-                return false;
+                throw e;
             }
 
         }
@@ -27,9 +27,9 @@ namespace HotChocolateGraph.Mutation
                 repository.Update(person);
                 return true;
             }
-            catch
+            catch(GraphQLException e)
             {
-                return false;
+                throw e;
             }
         }
     }

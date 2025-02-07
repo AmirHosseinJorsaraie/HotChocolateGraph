@@ -12,22 +12,48 @@ namespace HotChocolateGraph.ApiRepository
 
         public void Add(Person person)
         {
-            _list.Add(person);
+            try
+            {
+                _list.Add(person);
+            }
+            catch
+            {
+                throw new GraphQLException();
+            }
         }
 
         public List<Person> GetPeople()
         {
-            return _list;
+            try
+            {
+                return _list;
+            }
+            catch
+            {
+                throw new GraphQLException();
+            }
         }
 
         public void Update(Person person)
         {
-            var target = _list.FirstOrDefault(x => x.Id == person.Id);
-            if (target != null)
+            try
             {
-                target.Age = person.Age;    
-                target.Name = person.Name;
+                var target = _list.FirstOrDefault(x => x.Id == person.Id);
+                if (target != null)
+                {
+                    target.Age = person.Age;
+                    target.Name = person.Name;
+                }
+                else
+                {
+                    throw new GraphQLException(new Error("Person Not Found!", "404"));
+                }
             }
+            catch
+            {
+                throw new GraphQLException();
+            }
+           
         }
     }
 }

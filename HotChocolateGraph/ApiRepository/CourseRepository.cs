@@ -12,21 +12,46 @@ namespace HotChocolateGraph.ApiRepository
 
         public List<Course> GetCourses()
         {
-            return _list;
+            try
+            {
+                return _list;
+            }
+            catch
+            {
+                throw new GraphQLException();
+            }
         }
 
         public void Add(Course course)
         {
-            _list.Add(course);
+            try
+            {
+                _list.Add(course);
+            }
+            catch
+            {
+                throw new GraphQLException();
+            }
         }
 
         public void Update(Course course)
         {
-            Course target = _list.FirstOrDefault(x => x.Id == course.Id);
-            if (target != null)
+            try
             {
-                target.TeacherId = course.TeacherId;
-                target.CourseName = course.CourseName;
+                Course target = _list.FirstOrDefault(x => x.Id == course.Id);
+                if (target != null)
+                {
+                    target.TeacherId = course.TeacherId;
+                    target.CourseName = course.CourseName;
+                }
+                else
+                {
+                    throw new GraphQLException(new Error("Course Not Found!", "404"));
+                }
+            }
+            catch
+            {
+                throw new GraphQLException();
             }
         }
     }
