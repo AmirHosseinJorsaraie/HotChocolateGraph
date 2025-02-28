@@ -14,7 +14,9 @@ builder.Services.AddGraphQLServer()
     .AddTypeExtension<PersonQuery>()
     .AddTypeExtension<CourseQuery>()
     .AddTypeExtension<PersonSubscription>()
+    .AddTypeExtension<CourseSubscription>()
     .AddTypeExtension<PersonMutation>()
+    .AddTypeExtension<CourseMutation>()
     .AddInMemorySubscriptions();
 
 
