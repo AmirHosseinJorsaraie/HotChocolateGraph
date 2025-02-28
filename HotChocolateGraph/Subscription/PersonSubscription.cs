@@ -7,11 +7,11 @@ namespace HotChocolateGraph.Subscription
     public class PersonSubscription
     {
         [Subscribe]
-        [Topic($"{nameof(PersonMutation.Add)}_{nameof(PersonMutation)}")]
-        public Person OnAdd([EventMessage] Person person) => person;
+        [Topic($"{nameof(PersonMutation.AddPerson)}_{nameof(PersonMutation)}")]
+        public Person OnAddPerson([EventMessage] Person person) => person;
 
         [Subscribe]
-        [Topic($"{nameof(PersonMutation.Update)}_{nameof(PersonMutation)}")]
-        public Person OnUpdate([EventMessage] Person person) => person; 
+        [Topic($"{nameof(PersonMutation.UpdatePereson)}_{nameof(PersonMutation)}")]
+        public Person OnUpdatePerson([EventMessage] Person person) => person; 
     }
 }
