@@ -51,7 +51,7 @@ namespace HotChocolateGraph.ApiRepository
             }
             catch
             {
-                throw new GraphQLException();
+                throw;
             }
            
         }
